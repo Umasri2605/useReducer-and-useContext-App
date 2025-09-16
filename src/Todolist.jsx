@@ -9,10 +9,10 @@ const initialState={
 const reducer=(state=initialState,action)=>{
     switch (action.type){
         case "ADDTODO":
-            return{...state,todos:[...state.todos,{...action.newState}]}
+            return{...state,todos:[...state.todos,{...state.newState}]}
     
-        case "UPDATETODO":
-            return{...state.newState,title:action.payload}
+        case "UPDATENEWTODO":
+            return{...state,newState:{...state.newState,title:action.payload}}
     }
 }
 function Todolist() {
@@ -21,7 +21,7 @@ function Todolist() {
   return (
     <div className='border border-2 border-warning m-2 p-2'>
       <h2>TodoList:</h2>
-      <input type="text" onChange={((e)=>{dispatch({type:"UPDATENEWTODO",payload:e.target.value})})}/>
+      <input type="text" onChange={(e)=>{dispatch({type:"UPDATENEWTODO",payload:e.target.value})}}/>
       <button onClick={()=>{dispatch({type:"ADDTODO"})}}>AddTodo</button>
       <ul>
         {
